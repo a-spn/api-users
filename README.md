@@ -1,11 +1,11 @@
-# api-users-v2
+# api-users
 
 Side-project of a user management Go Echo API, supporting authentication (based on go-JWT) and authorization (based on casbin). The application has been the subject of a series of articles available here : (TODO PUT LINK HERE) (french content). 
 
 ## Quick start 
 
     git clone 
-    cd api-users-v2
+    cd api-users
     docker compose up -d
 
 
@@ -33,7 +33,7 @@ The configuration is separated into several YAML blocks, to configure different 
             password: <db_user_password>
             host: <your_mysql_host>
             port: 3306
-            database: api-users-v2
+            database: api-users
 
 Database configuration block, you can put the database password in environment variable "MYSQL_PASSWORD". The database must exist on the sql instance. 
 
