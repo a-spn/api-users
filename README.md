@@ -1,15 +1,15 @@
-# api-users-v2
+# api-users-v2
 
 Side-project of a user management Go Echo API, supporting authentication (based on go-JWT) and authorization (based on casbin). The application has been the subject of a series of articles available here : (TODO PUT LINK HERE) (french content). 
 
-## Quick start 
+## Quick start 
 
     git clone 
     cd api-users-v2
     docker compose up -d
 
 
-## How to use
+## How to use
 
 All interactions are done via http requests.
 
@@ -22,7 +22,7 @@ When the access token expires, you can get a new one without signin back, at url
 All requests to "/users/*" require authentication with JWT access token in the authorization header :"Authorization:bearer <your_access_token>".
 You can create, update, list and delete users with the HTTP verbs POST (on /users),PUT,GET and DELETE (ON /users/<user_id>). 
 
-## Configuration
+## Configuration
 
 The configuration is separated into several YAML blocks, to configure different parts of the application.
 
