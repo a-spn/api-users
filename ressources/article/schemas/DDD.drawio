@@ -1,0 +1,51 @@
+<mxfile host="app.diagrams.net" modified="2023-05-02T13:08:11.499Z" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/112.0" etag="ttHcUqe2hT4a4M4s5D9r" version="21.2.4" type="device">
+  <diagram name="Page-1" id="b3_rmUjKcA8r_ARUdAtH">
+    <mxGraphModel dx="1674" dy="1991" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-2" value="Route" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-3" value="Middleware" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffff88;strokeColor=#36393d;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="120" y="200" width="720" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-4" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Controller&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#cdeb8b;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="160" y="280" width="440" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-5" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Service&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffcc99;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="200" y="360" width="360" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-6" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;DAO&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="240" y="440" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-8" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Model&lt;/font&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="640" y="300" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-9" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;strokeWidth=2;endWidth=53;endSize=20;width=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="80" as="sourcePoint" />
+            <mxPoint x="110" y="480" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-12" value="Requête " style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=17;fontStyle=1;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="50" y="180" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-13" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;strokeWidth=2;endWidth=53;endSize=20;width=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="190" y="480" as="sourcePoint" />
+            <mxPoint x="190" y="80" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-14" value="Réponse" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=17;fontStyle=1;rotation=-91;" vertex="1" parent="1">
+          <mxGeometry x="140" y="430" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="0fuMdFuiWBrqTVu0z_TD-15" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Client&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=0;strokeWidth=5;" vertex="1" parent="1">
+          <mxGeometry x="130" y="-20" width="50" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
