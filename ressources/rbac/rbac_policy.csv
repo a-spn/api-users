@@ -1,0 +1,22 @@
+g, admin, moderator_management
+
+p, moderator_management, moderator, GET, false
+p, moderator_management, moderator, PUT, false
+p, moderator_management, moderator, POST, false
+p, moderator_management, moderator, DELETE, false
+
+g, admin, user_management
+g, moderator, user_management
+
+p, user_management, user, GET, false
+p, user_management, user, PUT, false
+p, user_management, user, POST, false
+p, user_management, user, DELETE, false
+
+p, admin,admin,GET,true
+p, admin,admin,PUT,true
+
+p, moderator,moderator,GET,true
+p, moderator,moderator,PUT,true
+
+p, user,user,GET,true

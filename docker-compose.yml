@@ -1,0 +1,42 @@
+version: "3.3"
+x-db-env: &dbenv
+    MYSQL_PASSWORD: "CHANGE_ME_4_MORE_SECURITY"
+x-api-env: &apienv
+    SU_PASSWORD: "CHANGE_ME_4_MORE_SECURITY"
+services:
+  init-jwt-certs:
+    build: ressources/jwt_certs
+    container_name: init-jwt-certs
+    volumes:
+      - ./ressources/jwt_certs/generate_certs.sh:/tmp/generate_certs.sh:z
+      - certs-data:/certs
+  api-users:
+    build: ./
+    container_name: api-users
+    restart: on-failure
+    ports: 
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - ./ressources/compose-config.yml:/home/appli/config.yml
+      - ./ressources/rbac:/rbac
+      - certs-data:/certs
+    environment:
+      <<: *dbenv
+    entrypoint: ["/home/appli/server", "-c", "/home/appli/config.yml"]
+  mariadb:
+    image: 'mariadb:latest'
+    container_name: mariadb
+    restart: on-failure
+    environment:
+      MYSQL_USER: appli
+      MYSQL_DATABASE: api-users
+      MARIADB_RANDOM_ROOT_PASSWORD: "true"
+      <<: *dbenv
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql/
+volumes:
+  mysql-data:
+  certs-data:

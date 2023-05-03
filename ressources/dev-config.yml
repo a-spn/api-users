@@ -1,0 +1,24 @@
+mysql:
+  username: root
+  password: root
+  host: localhost
+  port: 3306
+  database: dev-env
+api:
+  port: 8080
+  prometheus_exporter_port: 8081
+jwt:
+  refresh_token:
+    private_cert: ./ressources/jwt_certs/refresh_jwt.key
+    public_cert: ./ressources/jwt_certs/refresh_jwt.key.pub
+  access_token:
+    private_cert: ./ressources/jwt_certs/access_jwt.key
+    public_cert: ./ressources/jwt_certs/access_jwt.key.pub
+rbac: 
+  model: ./ressources/rbac/rbac_model.conf
+  policy: ./ressources/rbac/rbac_policy.csv
+security:
+  bcrypt_hash_cost: 13
+  enable_su: true
+  su_login: root
+  su_password: root

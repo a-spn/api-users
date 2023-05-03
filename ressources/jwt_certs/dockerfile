@@ -1,0 +1,8 @@
+FROM bashell/alpine-bash:latest
+
+COPY ./generate_certs.sh /
+
+RUN apk add --update openssl && \
+    rm -rf /var/cache/apk/*
+
+ENTRYPOINT ["/generate_certs.sh","/certs"]

@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "11501d3e-8525-4b63-a62d-1f4e40a4a967",
+		"name": "api-users-v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login SU",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"json = pm.response.json()",
+									"pm.environment.set(\"refresh_token\", json.refresh_token);",
+									"pm.environment.set(\"access_token\", json.access_token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\":\"{{su_login}}\",\n    \"password\":\"{{su_pass}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/auth/signin",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"json = pm.response.json()",
+									"pm.environment.set(\"refresh_token\", json.refresh_token);",
+									"pm.environment.set(\"access_token\", json.access_token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\":\"foobar_adm\",\n    \"password\":\"Foobar1?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/auth/signin",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Moderator",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"json = pm.response.json()",
+									"pm.environment.set(\"refresh_token\", json.refresh_token);",
+									"pm.environment.set(\"access_token\", json.access_token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\":\"foobar_mod\",\n    \"password\":\"Foobar1?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/auth/signin",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"json = pm.response.json()",
+									"pm.environment.set(\"refresh_token\", json.refresh_token);",
+									"pm.environment.set(\"access_token\", json.access_token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\":\"foobar_user\",\n    \"password\":\"Foobar1?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/auth/signin",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"json = pm.response.json()",
+									"pm.environment.set(\"access_token\", json.access_token);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh_token\":\"{{refresh_token}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/auth/refresh",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User management",
+			"item": [
+				{
+					"name": "create Admin User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"foobar_admin\",\n    \"password\": \"Foobar1?\",\n    \"email\": \"foobar_admin2@gmail.com\",\n    \"role\": \"admin\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/users",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Normal User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"foobar_user\",\n    \"password\": \"Foobar1?\",\n    \"email\": \"foobar_user2@gmail.com\",\n    \"role\": \"user\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/users",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Moderator User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"foobar_mod\",\n    \"password\": \"Foobar1?\",\n    \"email\": \"foobar_mod@gmail.com\",\n    \"role\": \"moderator\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/users",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"json = pm.response.json()",
+									"pm.environment.set(\"user_id\", json[0].uid);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/users?include_deleted=true",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "include_deleted",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"foo\",\n    \"password\": \"bar\",\n    \"mail\": \"foobar@gmail.com\",\n    \"roles\": [\"admin\",\"moderator\",\"superuser\"]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/users/1",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"foobarz2\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/users/104",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"users",
+								"104"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"foo\",\n    \"password\": \"bar\",\n    \"mail\": \"foobar@gmail.com\",\n    \"roles\": [\"admin\",\"moderator\",\"superuser\"]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}:{{users_api_port}}/users/104",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{users_api_port}}",
+							"path": [
+								"users",
+								"104"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
