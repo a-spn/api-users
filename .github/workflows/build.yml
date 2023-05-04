@@ -20,7 +20,7 @@ jobs:
         with:
           args: >
             -Dsonar.organization=aspn
-            -Dsonar.projectKey=api-users
+            -Dsonar.projectKey=a-spn_api-users
             -Dsonar.exclusions=ressources/**
             -Dsonar.branch.name=main
           projectBaseDir: .
