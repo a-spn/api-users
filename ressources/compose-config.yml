@@ -2,7 +2,7 @@ mysql:
   username: appli
   host: mariadb
   port: 3306
-  database: api-users-v2
+  database: api-users
 api:
   port: 8080
   prometheus_exporter_port: 8081
@@ -20,4 +20,3 @@ security:
   bcrypt_hash_cost: 13
   enable_su: true
   su_login: root
-  su_password: root

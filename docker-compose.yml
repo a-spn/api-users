@@ -6,24 +6,36 @@ x-api-env: &apienv
 services:
   init-jwt-certs:
     build: ressources/jwt_certs
+    image: init-jwt-certs:latest
     container_name: init-jwt-certs
     volumes:
       - ./ressources/jwt_certs/generate_certs.sh:/tmp/generate_certs.sh:z
       - certs-data:/certs
   api-users:
     build: ./
+    image: api-users:latest
     container_name: api-users
     restart: on-failure
     ports: 
       - "8080:8080"
       - "8081:8081"
+    healthcheck:
+      test: curl --fail http://localhost:8080/status || exit 1
+      interval: 5s
+      retries: 20
+      start_period: 5s
+      timeout: 1s
     volumes:
       - ./ressources/compose-config.yml:/home/appli/config.yml
       - ./ressources/rbac:/rbac
       - certs-data:/certs
     environment:
       <<: *dbenv
+      <<: *apienv
     entrypoint: ["/home/appli/server", "-c", "/home/appli/config.yml"]
+    depends_on:
+      mariadb:
+        condition: service_healthy
   mariadb:
     image: 'mariadb:latest'
     container_name: mariadb
@@ -37,6 +49,12 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql/
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      interval: 5s
+      retries: 20
+      start_period: 5s
+      timeout: 1s
 volumes:
   mysql-data:
   certs-data:

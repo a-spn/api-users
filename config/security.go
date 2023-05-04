@@ -10,7 +10,7 @@ import (
 var (
 	ErrInvalidBcryptHashCost        = errors.New("bcrypt_hash_cost must be greater than 0")
 	ErrSuperuserLoginNotProvided    = errors.New("super user is enabled but his login is not provided")
-	ErrSuperuserPasswordNotProvided = errors.New("super user is enabled but his password is not ")
+	ErrSuperuserPasswordNotProvided = errors.New("super user is enabled but his password is not set")
 )
 
 type SecurityConfig struct {
