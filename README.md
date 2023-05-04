@@ -1,4 +1,4 @@
-# api-users
+# api-users
 
 Side-project of a user management Go Echo API, supporting authentication (based on go-JWT) and authorization (based on casbin). The application has been the subject of a series of articles available here : (TODO PUT LINK HERE) (french content). 
 
@@ -6,6 +6,9 @@ Side-project of a user management Go Echo API, supporting authentication (based 
 
     git clone 
     cd api-users
+
+In the docker-compose.yml file, update the passwords on lines 3 and 5 by your owns (default values: CHANGE_ME_4_MORE_SECURITY) 
+
     docker compose up -d
 
 
