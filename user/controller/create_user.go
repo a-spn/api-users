@@ -28,8 +28,6 @@ func (controller UserController) CreateUser(c echo.Context) error {
 			return c.JSON(http.StatusBadRequest, m{"msg": err.Error()})
 		case user_service.ErrorInvalidRole:
 			return c.JSON(http.StatusBadRequest, m{"msg": err.Error()})
-		case user_service.ErrorInvalidRole:
-			return c.JSON(http.StatusBadRequest, m{"msg": err.Error()})
 		case user_service.ErrorInvalidEmailAdress:
 			return c.JSON(http.StatusBadRequest, m{"msg": err.Error()})
 		case user_service.ErrorInvalidUsername:
