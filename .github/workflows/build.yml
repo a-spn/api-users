@@ -9,7 +9,6 @@ on:
 jobs:
   sonar:
     name: Run a SonarCloud Scan
-    needs: linting
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,7 +27,7 @@ jobs:
 
   push_to_registry:
     name: Push Docker image to Docker Hub
-    needs: [linting, sonar]
+    needs: [sonar]
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo

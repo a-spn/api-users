@@ -13,10 +13,10 @@ WORKDIR /usr/local/go/src/api-users
 COPY go.mod go.sum ./
 RUN go mod download 
 
-COPY ./user* ./user
-COPY ./authentication* ./authentication
-COPY ./authorization* ./authorization
-COPY ./config* ./config
+COPY ./user ./user
+COPY ./authentication ./authentication
+COPY ./authorization ./authorization
+COPY ./config ./config
 COPY main.go ./
 
 RUN go build -o /server
