@@ -22,6 +22,7 @@ jobs:
             -Dsonar.organization=aspn
             -Dsonar.projectKey=api-users
             -Dsonar.exclusions=ressources/**
+            -Dsonar.branch.name=main
           projectBaseDir: .
 
 
