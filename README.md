@@ -1,6 +1,6 @@
 # api-users
 
-Side-project of a user management Go Echo API, supporting authentication (based on go-JWT) and authorization (based on casbin). The application has been the subject of a series of articles available here : (TODO PUT LINK HERE) (french content). 
+Side-project of a user management Go Echo API, supporting authentication (based on go-JWT) and authorization (based on casbin). The application has been the subject of a series of articles available [here](https://medium.com/@alan.stephan/ce-que-jaurais-aim%C3%A9-lire-avant-d-%C3%A9crire-ma-premi%C3%A8re-application-golang-1-2-construction-d-une-5d296456c867) (french content). 
 
 ## Quick start 
 
