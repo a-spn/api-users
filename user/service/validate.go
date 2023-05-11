@@ -23,7 +23,7 @@ func (service *UserService) ValidateUser(user user_model.User, allowEmptyFields 
 	if err := service.ValidateUsername(user.Username, allowEmptyFields); err != nil {
 		return err
 	}
-	if err := service.ValidateEmail(user.Username, allowEmptyFields); err != nil {
+	if err := service.ValidateEmail(user.Email, allowEmptyFields); err != nil {
 		return err
 	}
 	//Check roles
@@ -41,7 +41,7 @@ func (service *UserService) ValidateUsername(username string, allowEmptyFields b
 	if !(allowEmptyFields && username == "") {
 		if res, err := regexp.MatchString(`^[a-zA-Z0-9_]{3,20}$`, username); !res || err != nil || username == config.Configuration.Security.SuperUserLogin {
 			if err != nil {
-				config.Logger.Info("username is invalid", zap.Error(err))
+				config.Logger.Info("username is invalid", zap.Error(err), zap.String("username", username))
 			}
 			return ErrorInvalidUsername
 		}
@@ -52,7 +52,7 @@ func (service *UserService) ValidateUsername(username string, allowEmptyFields b
 func (service *UserService) ValidateEmail(email string, allowEmptyFields bool) error {
 	if !(allowEmptyFields && email == "") {
 		if _, err := mail.ParseAddress(email); err != nil {
-			config.Logger.Info("email address is invalid", zap.Error(err))
+			config.Logger.Info("email address is invalid", zap.Error(err), zap.String("email", email))
 			return ErrorInvalidEmailAdress
 		}
 	}
