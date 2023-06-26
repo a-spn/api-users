@@ -12,14 +12,28 @@ const (
 type RbacConfig struct {
 	PathToCasbinModel  string `yaml:"model"`
 	PathToCasbinPolicy string `yaml:"policy"`
-	Enforcer           casbin.Enforcer
+
+	Enforcer *casbin.Enforcer
 }
 
 func (rbacConfig *RbacConfig) InitRBAC() (newConfig *RbacConfig) {
-	enf, err := casbin.NewEnforcer(rbacConfig.PathToCasbinModel, rbacConfig.PathToCasbinPolicy)
+	enforcer, err := casbin.NewEnforcer(rbacConfig.PathToCasbinModel, rbacConfig.PathToCasbinPolicy)
 	if err != nil {
 		Logger.Fatal("can't initialize casbin Enforcer", zap.Error(err))
 	}
-	rbacConfig.Enforcer = *enf
+	rbacConfig.Enforcer = enforcer
 	return rbacConfig
+}
+
+func (rbacConfig *RbacConfig) ListAllRoles() (roles []string) {
+	return rbacConfig.Enforcer.GetAllObjects()
+}
+
+func (rbacConfig *RbacConfig) IsRoleValid(role string) bool {
+	for _, r := range rbacConfig.ListAllRoles() {
+		if role == r {
+			return true
+		}
+	}
+	return false
 }

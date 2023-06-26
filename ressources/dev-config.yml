@@ -22,3 +22,5 @@ security:
   enable_su: true
   su_login: root
   su_password: root
+  enable_local_register: true
+  attributed_role_on_register: user

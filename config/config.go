@@ -33,7 +33,8 @@ func ParseConfig() {
 
 func InitConfig() {
 	InitLogger()
+	Configuration.Rbac = *Configuration.Rbac.InitRBAC()
 	Configuration.JWT = *Configuration.JWT.InitJWT()
 	Configuration.Security = *Configuration.Security.InitSecurity()
-	Configuration.Rbac = *Configuration.Rbac.InitRBAC()
+
 }

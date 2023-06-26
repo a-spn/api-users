@@ -10,7 +10,6 @@ import (
 
 func (dao *UserDAO) CreateUser(user user_model.User) (err error) {
 	err = dao.db.Create(&user).Error
-
 	if err != nil {
 		config.Logger.Error("error on inserting a new user in db", zap.Error(err), zap.String("username", user.Username))
 		if mysqlErr, ok := err.(*mysql.MySQLError); ok {

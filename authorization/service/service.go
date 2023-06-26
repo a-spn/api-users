@@ -43,7 +43,3 @@ func (service *AuthorizationService) ListVisibleRoles(authorizationContext autho
 	}
 	return visibleRoles, nil
 }
-
-func (service *AuthorizationService) ListAllRoles() (roles []string) {
-	return config.Configuration.Rbac.Enforcer.GetAllObjects()
-}

@@ -1,8 +1,6 @@
-package user_controller
+package authentication_controller
 
 import (
-	authorization_model "api-users/authorization/model"
-	authorization_service "api-users/authorization/service"
 	"api-users/config"
 	user_dao "api-users/user/dao"
 	user_model "api-users/user/model"
@@ -11,15 +9,17 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"go.uber.org/zap"
 )
 
-func (controller UserController) CreateUser(c echo.Context) error {
-	var user user_model.User
-	err := json.NewDecoder(c.Request().Body).Decode(&user)
+func (controller *AuthenticationController) Register(c echo.Context) error {
+	var newUser user_model.User
+	err := json.NewDecoder(c.Request().Body).Decode(&newUser)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, m{"msg": config.JsonParsingFailMessage})
+		config.Logger.Info("failed to parse JSON body", zap.Error(err))
+		return c.JSON(400, m{"msg": config.JsonParsingFailMessage})
 	}
-	err = controller.UserService.CreateUserWithAuthorizationContext(user, c.Get(config.RbacAuthorizationContextKey).(authorization_model.AuthorizationContext))
+	err = controller.AuthenticationService.Register(newUser)
 	if err != nil {
 		switch err {
 		case user_service.ErrorPasswordContainSpace:
@@ -34,11 +34,9 @@ func (controller UserController) CreateUser(c echo.Context) error {
 			return c.JSON(http.StatusBadRequest, m{"msg": err.Error()})
 		case user_dao.ErrDuplicateKeyEntry:
 			return c.JSON(http.StatusConflict, m{"msg": "the fields 'ID','email' and 'username' must be unique"})
-		case authorization_service.ErrUnauthorizedOperation:
-			return c.NoContent(http.StatusForbidden)
 		default:
 			c.NoContent(http.StatusInternalServerError)
 		}
 	}
-	return c.JSON(http.StatusCreated, m{"msg": config.RessourceSuccesfullyCreatedMessage})
+	return c.NoContent(200)
 }

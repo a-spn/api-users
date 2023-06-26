@@ -20,3 +20,5 @@ security:
   bcrypt_hash_cost: 13
   enable_su: true
   su_login: root
+  enable_local_register: true
+  attributed_role_on_register: user

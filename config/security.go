@@ -8,9 +8,10 @@ import (
 )
 
 var (
-	ErrInvalidBcryptHashCost        = errors.New("bcrypt_hash_cost must be greater than 0")
-	ErrSuperuserLoginNotProvided    = errors.New("super user is enabled but his login is not provided")
-	ErrSuperuserPasswordNotProvided = errors.New("super user is enabled but his password is not set")
+	ErrInvalidBcryptHashCost                 = errors.New("bcrypt_hash_cost must be greater than 0")
+	ErrSuperuserLoginNotProvided             = errors.New("super user is enabled but his login is not provided")
+	ErrSuperuserPasswordNotProvided          = errors.New("super user is enabled but his password is not set")
+	ErrorAttributedRoleOnRegisterDoesntExist = errors.New("attributed role on register doesnt exist in casbin policy model")
 )
 
 type SecurityConfig struct {
@@ -19,6 +20,10 @@ type SecurityConfig struct {
 	SuperUserIsEnabled bool   `yaml:"enable_su"`
 	SuperUserLogin     string `yaml:"su_login"`
 	SuperUserPass      string `yaml:"su_password"`
+
+	//Register config
+	EnableLocalRegister      bool   `yaml:"enable_local_register"`
+	AttributedRoleOnRegister string `yaml:"attributed_role_on_register"`
 }
 
 func (securityConfig *SecurityConfig) InitSecurity() *SecurityConfig {
@@ -38,6 +43,9 @@ func (securityConfig *SecurityConfig) InitSecurity() *SecurityConfig {
 				securityConfig.SuperUserPass = os.Getenv("SU_PASSWORD")
 			}
 		}
+	}
+	if !Configuration.Rbac.IsRoleValid(securityConfig.AttributedRoleOnRegister) {
+		Logger.Fatal("invalid attributed role on register", zap.Error(ErrorAttributedRoleOnRegisterDoesntExist))
 	}
 	return securityConfig
 }

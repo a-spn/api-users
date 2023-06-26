@@ -61,13 +61,10 @@ func (service *UserService) ValidateEmail(email string, allowEmptyFields bool) e
 
 func (service UserService) ValidateRole(role string, allowEmptyFields bool) error {
 	if !(allowEmptyFields && role == "") {
-		for _, r := range service.AuthorizationService.ListAllRoles() {
-			if role == r {
-				return nil
-			}
+		if !config.Configuration.Rbac.IsRoleValid(role) {
+			config.Logger.Info("Invalid role", zap.String("role", role), zap.Error(ErrorInvalidRole))
+			return ErrorInvalidRole
 		}
-		config.Logger.Info("Invalid role", zap.String("role", role), zap.Error(ErrorInvalidRole))
-		return ErrorInvalidRole
 	}
 	return nil
 }
