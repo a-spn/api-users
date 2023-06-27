@@ -8,9 +8,11 @@ api:
   prometheus_exporter_port: 8081
 jwt:
   refresh_token:
+    jwt_sign_method: RS512
     private_cert: /certs/refresh_jwt.key
     public_cert: /certs/refresh_jwt.key.pub
   access_token:
+    jwt_sign_method: RS512
     private_cert: /certs/access_jwt.key
     public_cert: /certs/access_jwt.key.pub
 rbac: 
