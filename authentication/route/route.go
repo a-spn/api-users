@@ -21,5 +21,4 @@ func (routes *AuthenticationRoutes) CreateRoutes(e *echo.Echo) {
 	if config.Configuration.Security.EnableLocalRegister {
 		e.POST("/auth/register", routes.Controller.Register)
 	}
-
 }

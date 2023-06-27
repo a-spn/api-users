@@ -18,7 +18,8 @@ func NewUserRoutes(controller *user_controller.UserController, authenticationMid
 	return &UserRoutes{UserController: controller, AuthenticationMiddlewares: authenticationMiddlewares, AuthorizationMiddleware: authorizationMiddleware}
 }
 func (routes *UserRoutes) CreateRoutes(e *echo.Echo) {
-	r := e.Group("/users", routes.AuthenticationMiddlewares.JwtAuthentication, routes.AuthorizationMiddleware.RbacAuthorization) //middlewares.RBAC_Authorization
+	e.GET("/whoami", routes.UserController.Whoami, routes.AuthenticationMiddlewares.JwtAuthentication)
+	r := e.Group("/users", routes.AuthenticationMiddlewares.JwtAuthentication, routes.AuthorizationMiddleware.RbacAuthorization)
 	r.POST("", routes.UserController.CreateUser)
 	r.GET("", routes.UserController.GetUsers)
 	r.GET("/:id", routes.UserController.GetUser)

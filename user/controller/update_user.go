@@ -30,7 +30,7 @@ func (controller UserController) UpdateUser(c echo.Context) error {
 	err = controller.UserService.UpdateUser(user, c.Get(config.RbacAuthorizationContextKey).(authorization_model.AuthorizationContext))
 	if err != nil {
 		if errors.Is(err, user_service.ErrorPasswordContainSpace) || errors.Is(err, user_service.ErrorPasswordRequirements) || errors.Is(err, user_service.ErrorInvalidRole) || errors.Is(err, user_service.ErrorInvalidRole) || errors.Is(err, user_service.ErrorInvalidEmailAdress) || errors.Is(err, user_service.ErrorInvalidUsername) {
-			return c.JSON(http.StatusBadRequest, m{"msg": err})
+			return c.JSON(http.StatusBadRequest, m{"msg": err.Error()})
 		} else if errors.Is(err, user_dao.ErrDuplicateKeyEntry) {
 			return c.JSON(http.StatusConflict, m{"msg": err})
 		} else if errors.Is(err, user_dao.ErrUserDoesNotExist) {

@@ -6,7 +6,7 @@ import (
 )
 
 func (service *AuthenticationService) Refresh(auth authentication_model.AuthTokens) (tokens authentication_model.AuthTokens, authorized bool, err error) {
-	claims, err := service.DecodeJwt(auth.RefreshTokenString, config.Configuration.JWT.RefreshToken.VerifyKey)
+	claims, err := service.DecodeJwt(auth.RefreshTokenString, config.Configuration.JWT.RefreshToken)
 	if err != nil {
 		return tokens, false, nil
 	}
@@ -14,7 +14,7 @@ func (service *AuthenticationService) Refresh(auth authentication_model.AuthToke
 	if err != nil {
 		return tokens, false, nil
 	}
-	tokens.AccessTokenString, tokens.AccessToken, err = service.GenerateJwt(user.ID, user.Username, "accessToken", user.Role, config.AccessDuration, config.Configuration.JWT.AccessToken.SignKey)
+	tokens.AccessTokenString, tokens.AccessToken, err = service.GenerateJwt(user.ID, user.Username, "accessToken", user.Role, config.AccessDuration, config.Configuration.JWT.AccessToken)
 	if err != nil {
 		return tokens, false, err
 	}

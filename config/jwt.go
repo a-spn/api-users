@@ -2,6 +2,7 @@ package config
 
 import (
 	"crypto/rsa"
+	"errors"
 	"io/ioutil"
 	"time"
 
@@ -16,7 +17,9 @@ const (
 )
 
 var (
-	JwtSignMethod = jwt.SigningMethodRS512
+	ErrInvalidJWTProtocol = errors.New("unknown jwt signin method : available methods are 'RS512' and 'HS512'")
+	JwtSignMethodRS512    = jwt.SigningMethodRS512
+	JwtSignMethodHS512    = jwt.SigningMethodHS512
 )
 
 type JwtConfig struct {
@@ -25,24 +28,43 @@ type JwtConfig struct {
 }
 
 type JwtSpecs struct {
-	Duration        time.Duration
-	PrivateCertPath string `yaml:"private_cert"`
-	SignKey         *rsa.PrivateKey
-	PublicCertPath  string `yaml:"public_cert"`
-	VerifyKey       *rsa.PublicKey
+	// Config
+	JwtSignInMethodName string `yaml:"jwt_sign_method"`
+	PrivateCertPath     string `yaml:"private_cert"`
+	PublicCertPath      string `yaml:"public_cert"`
+	SecretKey           string `yaml:"secret_key"`
+	// Data
+	SigninMethod jwt.SigningMethod
+
+	SignKey        *rsa.PrivateKey
+	VerifyKey      *rsa.PublicKey
+	SecretKeyBytes []byte
+
+	Duration time.Duration
 }
 
 func (jwtConfig *JwtConfig) InitJWT() *JwtConfig {
-	jwtConfig.AccessToken = *jwtConfig.AccessToken.LoadKeys()
-	jwtConfig.AccessToken.Duration = AccessDuration
-	jwtConfig.RefreshToken = *jwtConfig.RefreshToken.LoadKeys()
-	jwtConfig.RefreshToken.Duration = RefreshDuration
+	jwtConfig.AccessToken = *jwtConfig.AccessToken.InitTokenConfig(AccessDuration)
+	jwtConfig.RefreshToken = *jwtConfig.RefreshToken.InitTokenConfig(RefreshDuration)
 	return jwtConfig
 }
 
-func (jwtSpecs *JwtSpecs) LoadKeys() *JwtSpecs {
-	jwtSpecs.SignKey = LoadPrivateKey(jwtSpecs.PrivateCertPath)
-	jwtSpecs.VerifyKey = LoadPublicKey(jwtSpecs.PublicCertPath)
+func (jwtSpecs *JwtSpecs) InitTokenConfig(duration time.Duration) *JwtSpecs {
+	jwtSpecs.Duration = duration
+	switch jwtSpecs.JwtSignInMethodName {
+	case "RS512":
+		jwtSpecs.SigninMethod = JwtSignMethodRS512
+		jwtSpecs.SignKey = LoadPrivateKey(jwtSpecs.PrivateCertPath)
+		jwtSpecs.VerifyKey = LoadPublicKey(jwtSpecs.PublicCertPath)
+	case "HS512":
+		jwtSpecs.SigninMethod = JwtSignMethodHS512
+		if jwtSpecs.SecretKey == "" {
+			Logger.Fatal("Invalid secret key", zap.Error(errors.New("jwt sign key is empty")))
+		}
+		jwtSpecs.SecretKeyBytes = []byte(jwtSpecs.SecretKey)
+	default:
+		Logger.Fatal("Invalid jwt signin method", zap.Error(ErrInvalidJWTProtocol))
+	}
 	return jwtSpecs
 }
 

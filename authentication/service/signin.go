@@ -17,11 +17,11 @@ func (service *AuthenticationService) SignIn(auth authentication_model.AuthLogin
 	if !authorized || err != nil {
 		return tokens, false, err
 	}
-	tokens.RefreshTokenString, tokens.RefreshToken, err = service.GenerateJwt(user.ID, user.Username, "refreshToken", user.Role, config.RefreshDuration, config.Configuration.JWT.RefreshToken.SignKey)
+	tokens.RefreshTokenString, tokens.RefreshToken, err = service.GenerateJwt(user.ID, user.Username, "refreshToken", user.Role, config.RefreshDuration, config.Configuration.JWT.RefreshToken)
 	if err != nil {
 		return tokens, false, err
 	}
-	tokens.AccessTokenString, tokens.AccessToken, err = service.GenerateJwt(user.ID, user.Username, "accessToken", user.Role, config.AccessDuration, config.Configuration.JWT.AccessToken.SignKey)
+	tokens.AccessTokenString, tokens.AccessToken, err = service.GenerateJwt(user.ID, user.Username, "accessToken", user.Role, config.AccessDuration, config.Configuration.JWT.AccessToken)
 	if err != nil {
 		return tokens, false, err
 	}

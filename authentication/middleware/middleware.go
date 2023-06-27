@@ -30,7 +30,7 @@ func (middleware AuthenticationMiddlewares) JwtAuthentication(next echo.HandlerF
 			return c.JSON(http.StatusBadRequest, m{"msg": "missing jwt authentication token", "tip": "Provide it with the 'Authorization' Header, in the format 'Bearer <your_token>'"})
 
 		}
-		claims, err := middleware.AuthService.DecodeJwt(parsedHeader[1], &config.Configuration.JWT.AccessToken.SignKey.PublicKey)
+		claims, err := middleware.AuthService.DecodeJwt(parsedHeader[1], config.Configuration.JWT.AccessToken)
 		if err != nil {
 			return c.JSON(http.StatusUnauthorized, m{"msg": err.Error()})
 		}
